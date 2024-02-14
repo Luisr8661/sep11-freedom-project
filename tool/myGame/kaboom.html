@@ -14,7 +14,7 @@
 
 			kaboom()
 
-loadSprite("bean", "bean.png")
+loadSprite("mordecai", "mordecai.png")
 
 // define gravity
 setGravity(3200)
@@ -28,9 +28,9 @@ scene("game", () => {
 	const CEILING = -60
 
 	// a game object consists of a list of components and tags
-	const bean = add([
+	const mordecai = add([
 		// sprite() means it's drawn with a sprite of name "bean" (defined above in 'loadSprite')
-		sprite("bean"),
+		sprite("mordecai"),
 		// give it a position
 		pos(width() / 4, 0),
 		// give it a collider
@@ -40,8 +40,8 @@ scene("game", () => {
 	])
 
 	// check for fall death
-	bean.onUpdate(() => {
-		if (bean.pos.y >= height() || bean.pos.y <= CEILING) {
+	mordecai.onUpdate(() => {
+		if (mordecai.pos.y >= height() || mordecai.pos.y <= CEILING) {
 			// switch to "lose" scene
 			go("lose", score)
 		}
@@ -49,16 +49,16 @@ scene("game", () => {
 
 	// jump
 	onKeyPress("space", () => {
-		bean.jump(JUMP_FORCE)
+		mordecai.jump(JUMP_FORCE)
 	})
 
 	onGamepadButtonPress("south", () => {
-		bean.jump(JUMP_FORCE)
+		mordecai.jump(JUMP_FORCE)
 	})
 
 	// mobile
 	onClick(() => {
-		bean.jump(JUMP_FORCE)
+		mordecai.jump(JUMP_FORCE)
 	})
 
 	function spawnPipe() {
@@ -80,7 +80,7 @@ scene("game", () => {
 		])
 
 		add([
-			pos(width(), h1 + PIPE_OPEN),
+		pos(width(), h1 + PIPE_OPEN),
 			rect(64, h2),
 			color(0, 127, 255),
 			outline(4),
@@ -96,15 +96,15 @@ scene("game", () => {
 	}
 
 	// callback when bean onCollide with objects with tag "pipe"
-	bean.onCollide("pipe", () => {
+	mordecai.onCollide("pipe", () => {
 		go("lose", score)
-		addKaboom(bean.pos)
+		addKaboom(mordecai.pos)
 	})
 
 	// per frame event for all objects with tag 'pipe'
 	onUpdate("pipe", (p) => {
 		// check if bean passed the pipe
-		if (p.pos.x + p.width <= bean.pos.x && p.passed === false) {
+		if (p.pos.x + p.width <= mordecai.pos.x && p.passed === false) {
 			addScore()
 			p.passed = true
 		}
@@ -136,7 +136,7 @@ scene("game", () => {
 scene("lose", (score) => {
 
 	add([
-		sprite("bean"),
+		sprite("mordecai"),
 		pos(width() / 2, height() / 2 - 108),
 		scale(3),
 		anchor("center"),
