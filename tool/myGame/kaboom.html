@@ -37,6 +37,8 @@ scene("game", () => {
 		area(),
 		// body component enables it to fall and jump in a gravity world
 		body(),
+		scale(0.06),
+		health(3),
 	])
 
 	// check for fall death
@@ -97,9 +99,18 @@ scene("game", () => {
 
 	// callback when bean onCollide with objects with tag "pipe"
 	mordecai.onCollide("pipe", () => {
-		go("lose", score)
-		addKaboom(mordecai.pos)
+		mordecai.hurt(1),
+		bad.hurt(1)
+		addKaboom(mordecai.pos),
+		//go("lose", score)
+		//addKaboom(mordecai.pos)
 	})
+	mordecai.on("death", () => {
+    	destroy(mordecai)
+   	 go("lose", score)
+		addKaboom(mordecai.pos)
+})
+
 
 	// per frame event for all objects with tag 'pipe'
 	onUpdate("pipe", (p) => {
@@ -138,7 +149,7 @@ scene("lose", (score) => {
 	add([
 		sprite("mordecai"),
 		pos(width() / 2, height() / 2 - 108),
-		scale(3),
+		scale(0.125),
 		anchor("center"),
 	])
 
