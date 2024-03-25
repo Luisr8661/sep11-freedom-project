@@ -18,15 +18,14 @@ loadSprite("mordecai", "mordecai.png")
 
 // define gravity
 setGravity(3200)
-
 scene("game", () => {
-
 	const PIPE_OPEN = 240
 	const PIPE_MIN = 60
 	const JUMP_FORCE = 800
 	const SPEED = 320
 	const CEILING = -60
 
+	setBackground(255,60,167);
 	// a game object consists of a list of components and tags
 	const mordecai = add([
 		// sprite() means it's drawn with a sprite of name "bean" (defined above in 'loadSprite')
@@ -41,7 +40,6 @@ scene("game", () => {
 		health(3),
 	])
 
-	// check for fall death
 	mordecai.onUpdate(() => {
 		if (mordecai.pos.y >= height() || mordecai.pos.y <= CEILING) {
 			// switch to "lose" scene
@@ -72,7 +70,7 @@ scene("game", () => {
 		add([
 			pos(width(), 0),
 			rect(64, h1),
-			color(0, 127, 255),
+			color(0, mordecai.pos.y, 150),
 			outline(4),
 			area(),
 			move(LEFT, SPEED),
@@ -84,7 +82,7 @@ scene("game", () => {
 		add([
 		pos(width(), h1 + PIPE_OPEN),
 			rect(64, h2),
-			color(0, 127, 255),
+			color(mordecai.pos.y, 0, 150),
 			outline(4),
 			area(),
 			move(LEFT, SPEED),
@@ -108,7 +106,6 @@ scene("game", () => {
     go("lose", score)
 	addKaboom(mordecai.pos)
 })
-
 
 	// per frame event for all objects with tag 'pipe'
 	onUpdate("pipe", (p) => {
