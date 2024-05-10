@@ -4,7 +4,8 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-		<h1>press any key to jump, you have three hits.</h1>
+		<h1>Mordecai has been transpoted by a petty wizard to the flappy dimension!
+			Press any key to jump, you have three hits.</h1>
  </head>
     <body>
         <script type="module">
@@ -16,6 +17,7 @@
 			kaboom()
 
 loadSprite("mordecai", "mordecai.png")
+loadSprite("apple", "https://kaboomjs.com/sprites/apple.png")
 
 // define gravity
 setGravity(3200)
@@ -63,6 +65,7 @@ scene("game", () => {
 		mordecai.jump(JUMP_FORCE)
 	})
 
+
 	function spawnPipe() {
 
 		// calculate pipe positions
@@ -84,6 +87,7 @@ scene("game", () => {
 		add([
 		pos(width(), h1 + PIPE_OPEN),
 			rect(64, h2),
+			//color(mordecai.pos.y, 0, 150),
 			color(mordecai.pos.y, 0, 150),
 			outline(4),
 			area(),
@@ -103,6 +107,9 @@ scene("game", () => {
 		//go("lose", score)
 		addKaboom(mordecai.pos)
 	])
+	mordecai.onCollide("apple", () => {
+    mordecai.hurt(1)
+})
 
 	mordecai.on("death", () => {
     go("lose", score)
