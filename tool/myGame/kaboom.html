@@ -13,11 +13,17 @@
             // import kaboom lib
             import kaboom from "https://unpkg.com/kaboom@3000.0.1/dist/kaboom.mjs";
 
-
 			kaboom()
 
 loadSprite("mordecai", "mordecai.png")
 loadSprite("apple", "https://kaboomjs.com/sprites/apple.png")
+
+// define background
+setBackground(r,g,b);
+var r
+var g
+var b
+
 
 // define gravity
 setGravity(3200)
@@ -29,10 +35,10 @@ scene("game", () => {
 	const CEILING = -60
 
 	//setBackground(255,60,167);
-	setBackground(0,0,0);
+	//setBackground(r,g,b);
 	// a game object consists of a list of components and tags
 	const mordecai = add([
-		// sprite() means it's drawn with a sprite of name "bean" (defined above in 'loadSprite')
+		// sprite() means it's drawn with a sprite of name "mordecai" (defined above in 'loadSprite')
 		sprite("mordecai"),
 		// give it a position
 		pos(width() / 4, 0),
